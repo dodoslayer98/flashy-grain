@@ -32,6 +32,5 @@ export default function HomePage({user, setUser}){
                 menuItems={items.filter(item => item.category.name === activeCat)}
             />
         </main>
-
     )
 }

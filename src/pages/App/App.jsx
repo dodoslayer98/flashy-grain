@@ -7,6 +7,7 @@ import OrderHistoryPage from '../OrderHistoryPage/OrderHistoryPage';
 import NavBar from '../../components/NavBar/NavBar';
 import HomePage from '../HomePage/HomePage';
 import './App.css';
+import ItemDetailPage from '../itemDetailPage/ItemDetailPage';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -20,7 +21,7 @@ export default function App() {
             <Route path="/orders/new" element={<NewOrderPage />} />
             <Route path="/orders" element={<OrderHistoryPage />} />
             <Route path="/home" element={<HomePage user = {user} setUser={setUser}/>} />
-            <Route path="/item/:itemId" element={<HomePage user = {user} setUser={setUser}/>} />
+            <Route path="/item/:itemId" element={<ItemDetailPage/>} />
             <Route path="/*" element={<Navigate to="/home"/>}/>
           </Routes>
         </>
