@@ -21,6 +21,7 @@ app.use('/api/users', require('./routes/api/users'));
 
 const ensureLoggedIn = require('./config/ensureLoggedIn')
 app.use('/api/items', ensureLoggedIn, require('./routes/api/items'))
+app.use('/api/orders', ensureLoggedIn, require('./routes/api/orders'))
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
