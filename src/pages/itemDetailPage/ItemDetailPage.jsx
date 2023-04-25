@@ -1,11 +1,14 @@
 import { useParams } from "react-router-dom"
 import * as itemsAPI from '../../utilities/items-api'
-import { useState, useEffect } from "react"
+import * as ordersAPI from '../../utilities/orders-api';
+import { useState, useEffect, useContext } from "react"
 import HomePage from "../HomePage/HomePage"
+import { CartContext } from "../../contexts/CartContext"
 
 export default function ItemDetailPage(){
     const { itemId } = useParams()
     const [itemDetail,setItemDetail] = useState()
+    const {cart,setCart} = useContext(CartContext)
 
     useEffect ( function(){
         async function getItemDetail(){
@@ -16,7 +19,11 @@ export default function ItemDetailPage(){
         
     },[])
     
-    console.log(itemDetail)
+    async function handleAddToOrder(itemId) {
+        const updatedCart = await ordersAPI.addItemToCart(itemId);
+        setCart(updatedCart);
+    }
+
 
     return(
         <div>
@@ -25,7 +32,7 @@ export default function ItemDetailPage(){
             <h3>CA${itemDetail?.price}</h3>
             <h3>{itemDetail?.description}</h3>
             
-            <button onClick={() => console.log('clicked')}>
+            <button onClick={() => {handleAddToOrder(itemId)}}>
                 Add to cart 
             </button>
         </div>

@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react"
+import { useEffect, useContext } from "react"
+import { CartContext } from "../../contexts/CartContext";
 import * as ordersAPI from '../../utilities/orders-api';
 import LineItem from '../../components/LineItem/LineItem'
 
 export default function NewOrderPage(){
-    const [cart,setCart] = useState(null)
+
+    const {cart,setCart} = useContext(CartContext)
 
     useEffect(function() {
         async function getCart() {
@@ -20,7 +22,7 @@ export default function NewOrderPage(){
         lineItem={item}
         isPaid={cart.isPaid}
         key={item._id}
-      />
+      /> 
     );
   
 

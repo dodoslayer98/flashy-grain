@@ -1,13 +1,15 @@
 import * as itemsAPI from '../../utilities/items-api'
-import { useState, useEffect, useRef } from "react"
+import * as ordersAPI from '../../utilities/orders-api';
+import { useState, useEffect, useRef, useContext } from "react"
 import CategoryList from '../../components/CategoryList/CategoryList'; 
 import MenuList from '../../components/MenuList/MenuList';
-
+import { CartContext } from '../../contexts/CartContext';
 
 export default function HomePage({user, setUser}){
     const [items,setItems] = useState([])
     const [activeCat,setActiveCat] = useState('')
     const categoriesRef = useRef([])
+    const {cart,setCart} = useContext(CartContext)
 
     
     useEffect ( function(){
@@ -20,6 +22,13 @@ export default function HomePage({user, setUser}){
         getItems()
     },[])
 
+    async function handleAddToOrder(itemId) {
+        const updatedCart = await ordersAPI.addItemToCart(itemId);
+        setCart(updatedCart);
+    }
+
+
+
     return (
 
         <main>
@@ -29,6 +38,7 @@ export default function HomePage({user, setUser}){
                 setActiveCat={setActiveCat} 
             />
             <MenuList
+                handleAddToOrder={handleAddToOrder}
                 menuItems={items.filter(item => item.category.name === activeCat)}
             />
         </main>
