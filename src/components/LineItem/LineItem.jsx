@@ -4,7 +4,6 @@ import { CartContext } from '../../contexts/CartContext';
 
 
 export default function LineItem({ lineItem, isPaid }) {
-  
   const {setCart} = useContext(CartContext)
 
   async function handleChangeQty(itemId, newQty) {
@@ -12,13 +11,11 @@ export default function LineItem({ lineItem, isPaid }) {
     setCart(updatedCart);
   }
 
-
-
   return (
     <div >
-      <div className="flex-ctr-ctr">| {lineItem.item.brand} |</div>
+      <div>| {lineItem.item.brand} |</div>
       <div >
-        <span className="align-ctr">|{lineItem.item.model} |</span>
+        <span>|{lineItem.item.model} |</span>
         <span>| {lineItem.item.price.toFixed(2)}</span>
       </div>
       <div  style={{ justifyContent: isPaid && 'center' }}>

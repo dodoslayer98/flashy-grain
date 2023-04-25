@@ -35,10 +35,30 @@ async function setItemQtyInCart(req, res) {
 
 }
 
+async function checkout(req, res) {
+  try{
+    const cart = await Order.getCart(req.user._id);
+    cart.isPaid = true;
+    await cart.save();
+    res.json(cart);
+  }
+  catch (error){
+    res.status(400).json(error)
+  }
+
+}
+
+async function forUser(req, res) {
+  // get orders for the logged in user
+  const orders = await Order.find({user: req.user._id, isPaid: true}).sort('-updatedAt');
+  res.json(orders);
+}
   
 module.exports = {
   cart,
   addToCart,
   setItemQtyInCart,
+  checkout,
+  forUser
 };
   

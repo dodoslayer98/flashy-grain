@@ -62,7 +62,8 @@ orderSchema.methods.setItemQty = function(itemId, newQty) {
   const cart = this;
   const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
   if (lineItem && newQty <= 0) {
-    lineItem.remove();
+    console.log("remove")
+    cart.lineItems.pull({_id: lineItem._id})
   } else if (lineItem) {
     lineItem.qty = newQty;
   }

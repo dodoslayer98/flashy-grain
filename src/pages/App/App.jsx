@@ -23,7 +23,7 @@ export default function App() {
             <Routes>
             
               <Route path="/orders/new" element={<NewOrderPage />} />
-              <Route path="/orders" element={<OrderHistoryPage />} />
+              <Route path="/orders" element={<OrderHistoryPage user = {user} setUser={setUser} />} />
               <Route path="/home" element={<HomePage user = {user} setUser={setUser}/>} />
               <Route path="/item/:itemId" element={<ItemDetailPage/>} />
               <Route path="/*" element={<Navigate to="/home"/>}/>

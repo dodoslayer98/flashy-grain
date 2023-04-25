@@ -2,10 +2,12 @@ import { useEffect, useContext } from "react"
 import { CartContext } from "../../contexts/CartContext";
 import * as ordersAPI from '../../utilities/orders-api';
 import LineItem from '../../components/LineItem/LineItem'
+import { useNavigate } from 'react-router-dom';
 
 export default function NewOrderPage(){
 
     const {cart,setCart} = useContext(CartContext)
+    const navigate = useNavigate();
 
     useEffect(function() {
         async function getCart() {
@@ -16,6 +18,11 @@ export default function NewOrderPage(){
     }, []);
 
     if (!cart) return null;
+    async function handleCheckout() {
+      await ordersAPI.checkout();
+      // programatically change client-side routes
+      navigate('/orders');
+    }
 
     const lineItems = cart.lineItems.map(item =>
       <LineItem
@@ -45,7 +52,7 @@ export default function NewOrderPage(){
                 {cart.isPaid ?
                   <span>TOTAL&nbsp;&nbsp;</span>
                   :
-                  <button onClick={() => alert('clicked')} disabled={!lineItems.length}>CHECKOUT</button>
+                  <button onClick={handleCheckout} disabled={!lineItems.length}>CHECKOUT</button>
                 }
                 <span>{cart.totalQty}</span>
                 <span>${cart.orderTotal.toFixed(2)}</span>
