@@ -13,7 +13,7 @@ export default function MenuListItem({ menuItem,handleAddToOrder }) {
             <div className="container">
             <Link to={"/item/"+ menuItem._id}> <h4><b>{menuItem.brand} {menuItem.model}</b></h4></Link>
                 <p>${menuItem.price.toFixed(2)}</p>
-                <button onClick={handleClick}>
+                <button onClick={handleClick} className ="btn">
                 ADD
                 </button>
             </div>
