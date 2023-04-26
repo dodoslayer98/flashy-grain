@@ -12,22 +12,30 @@ export default function LineItem({ lineItem, isPaid }) {
   }
 
   return (
-    <div >
-      <div>| {lineItem.item.brand} |</div>
-      <div >
-        <span>|{lineItem.item.model} |</span>
-        <span>| {lineItem.item.price.toFixed(2)}</span>
+    <div className='container mx-auto'>
+      <div class="card mb-3" style={{width: '40rem'}}>
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src={lineItem.item.imgUrls[0]} class="img-fluid rounded ml-2" alt={lineItem.item.brand}/>
+          </div>
+          <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{lineItem.item.brand}{lineItem.item.model}</h5>
+            <span className='my-2' >CA${lineItem.item.price.toFixed(2)}</span>
+            <div  style={{ justifyContent: isPaid && 'center' }}> Qty:
+              {!isPaid &&
+                <button className='btn mx-2' onClick={() => handleChangeQty(lineItem.item._id, lineItem.qty - 1)}>−</button>
+              }
+              <span className='m-2' >{lineItem.qty}</span>
+              {!isPaid &&
+                <button className='btn mx-2' onClick={() => handleChangeQty(lineItem.item._id, lineItem.qty + 1)}>+</button>
+              }
+            </div>
+            <div className='m-2'>Total: CA${lineItem.extPrice.toFixed(2)}</div>
+          </div>
+        </div>
       </div>
-      <div  style={{ justifyContent: isPaid && 'center' }}>
-        {!isPaid &&
-          <button onClick={() => handleChangeQty(lineItem.item._id, lineItem.qty - 1)}>−</button>
-        }
-        <span>{lineItem.qty}</span>
-        {!isPaid &&
-          <button onClick={() => handleChangeQty(lineItem.item._id, lineItem.qty + 1)}>+</button>
-        }
-      </div>
-      <div >${lineItem.extPrice.toFixed(2)}</div>
+    </div>
     </div>
   );
   }

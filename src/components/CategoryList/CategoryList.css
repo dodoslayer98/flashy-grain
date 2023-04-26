@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,500&display=swap');
+
+
+.active-format {
+    color: black;
+    background-color: orange;
+    border: .1vmin solid black;
+    font-family: 'Lora', serif;
+  }
+
+.non-active-format {
+    font-family: 'Lora', serif;
+}

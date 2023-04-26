@@ -49,7 +49,6 @@ async function checkout(req, res) {
 }
 
 async function forUser(req, res) {
-  // get orders for the logged in user
   const orders = await Order.find({user: req.user._id, isPaid: true}).sort('-updatedAt');
   res.json(orders);
 }

@@ -20,7 +20,6 @@ export default function NewOrderPage(){
     if (!cart) return null;
     async function handleCheckout() {
       await ordersAPI.checkout();
-      // programatically change client-side routes
       navigate('/orders');
     }
 
@@ -32,34 +31,31 @@ export default function NewOrderPage(){
       /> 
     );
   
-
     return (    
-        <div>
-            <h1>CART</h1>
-        <div>
+        <div className="container" >
+            <h1 className='mt-5 mb-4 text-start mx-4'>CART</h1>
+        <div className='mb-4 text-start mx-4'>
           {cart.isPaid ?
-            <span>ORDER <span>{cart.orderId}</span></span>
+            <span >ORDER <span >{cart.orderId}</span></span>
             :
-            <span>NEW ORDER</span>
+            <span >NEW ORDER</span>
           }
-          <span>{new Date(cart.updatedAt).toLocaleDateString()}</span>
         </div>
         <div>
           {lineItems.length ?
             <>
               {lineItems}
               <section>
+                <p>Total: CA${cart.orderTotal.toFixed(2)}</p>
                 {cart.isPaid ?
                   <span>TOTAL&nbsp;&nbsp;</span>
                   :
-                  <button onClick={handleCheckout} disabled={!lineItems.length}>CHECKOUT</button>
+                  <button className="btn btn-outline-danger mb-5" onClick={handleCheckout} disabled={!lineItems.length}>CHECKOUT</button>
                 }
-                <span>{cart.totalQty}</span>
-                <span>${cart.orderTotal.toFixed(2)}</span>
               </section>
             </>
             :
-            <div>Ya wanna buy some cameras?</div>
+            <div className="text-start mx-4">No Items in Cart</div>
           }
         </div>
       </div>

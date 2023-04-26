@@ -27,11 +27,10 @@ export default function HomePage({user, setUser}){
         setCart(updatedCart);
     }
 
-
-
     return (
 
         <main>
+            <img style={{ width: '100%', height: 'auto' }} src="https://i.etsystatic.com/isbl/dc9c21/55525406/isbl_3360x840.55525406_8qhcyl5w.jpg?version=0"/>
             <CategoryList           
                 categories={categoriesRef.current}
                 activeCat={activeCat}

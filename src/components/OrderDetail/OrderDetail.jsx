@@ -6,6 +6,7 @@ export default function OrderDetail({ order, handleCheckout }) {
 
   const lineItems = order.lineItems.map(item =>
     <LineItem 
+    isPaid={order.isPaid}
     lineItem={item}
     key={item._id}
     />
@@ -13,13 +14,12 @@ export default function OrderDetail({ order, handleCheckout }) {
 
   return (
     <div >
-      <div >
+      <div className='mb-4'>
         {order.isPaid ?
-          <span>ORDER <span >{order.orderId}</span></span>
+          <span>Order Id: <span >{order.orderId}</span></span>
           :
-          <span>NEW ORDER</span>
+          <span>New Order</span>
         }
-        <span>{new Date(order.updatedAt).toLocaleDateString()}</span>
       </div>
       <div >
         {lineItems.length ?
@@ -34,12 +34,11 @@ export default function OrderDetail({ order, handleCheckout }) {
                   disabled={!lineItems.length}
                 >CHECKOUT</button>
               }
-              <span>{order.totalQty}</span>
-              <span>${order.orderTotal.toFixed(2)}</span>
+              <span>CA${order.orderTotal.toFixed(2)}</span>
             </section>
           </>
           :
-          <div>Buy more camerassss</div>
+          <div>No Past Orders</div>
         }
       </div>
     </div>
